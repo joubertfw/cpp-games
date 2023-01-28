@@ -1,4 +1,5 @@
 #include "Render.h"
+#include "Object/Object.h"
 
 void Render::Draw()
 {

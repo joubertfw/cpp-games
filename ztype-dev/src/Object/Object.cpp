@@ -3,6 +3,6 @@
 
 void Object::Draw()
 {
-
+    
 }
 
