@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 #include "Render/Render.h"
 
@@ -26,7 +26,7 @@ int main(int argc, char** argv)
   glutDisplayFunc(&display);
 
 
-  gluOrtho2D(0, 0, 200, 200);  
+  gluOrtho2D(0, 0, 600, 600);  
   /* Run the GLUT event loop */
   glutMainLoop();
 

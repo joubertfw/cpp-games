@@ -1,9 +1,6 @@
-#pragma once
-
 #include "Primitive.h"
 #include "../Object/Object.h"
-
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 void Primitive::Quad(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor)
 {
