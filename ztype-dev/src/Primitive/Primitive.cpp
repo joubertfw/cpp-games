@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Primitive.h"
-#include "Object/Object.h"
+#include "../Object/Object.h"
 
 #include <GL/glut.h>
 

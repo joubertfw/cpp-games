@@ -1,4 +1,4 @@
-#include "Primitive/Primitive.h"
+#include "../Primitive/Primitive.h"
 
 class Object
 {
