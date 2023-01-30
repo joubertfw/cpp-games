@@ -1,6 +1,9 @@
 #include <GL/freeglut.h>
 #include "Render.h"
 #include "../Object/Object.h"
+#include "../Primitive/Primitive.h"
+
+Primitive *primitive = new Primitive();
 
 void Render::Draw()
 {
@@ -28,10 +31,7 @@ void Render::Draw()
 
     glTranslated(0, 1, 0);
     glBegin(GL_POLYGON);
-      glVertex2f(-0.5f, -0.5f);
-      glVertex2f( 0.5f, -0.5f);
-      glVertex2f( 0.5f,  0.5f);
-      glVertex2f(-0.5f,  0.5f);
+      primitive->Quad(1.5f, 1.5f, 0.0f, 0.0f);
     glEnd();
 
   glPopMatrix();
