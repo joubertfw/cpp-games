@@ -1,13 +1,12 @@
 #include "../Primitive/Primitive.h"
 #include "Object.h"
 
-void Object::draw(int Primitive::*function(float x, float y, float xs, float ys))
+void Object::draw(void (Primitive::*function)())
 {
-    function(this->m_posX, this->m_posY, this->m_sizeX, this->m_sizeY);
+    (m_primitive->*function)();
 }
 
-void Object::draw(int Primitive::*function(float x, float y, float xs))
+Object::Object(float posX, float posY, float sizeX, float sizeY)
 {
-    function(this->m_posX, this->m_posY, this->m_sizeX);
-} 
-
+    m_primitive = new Primitive(posX, posY, sizeX, sizeY);
+}
