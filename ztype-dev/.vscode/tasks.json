@@ -7,17 +7,18 @@
         "args": [
           "-fdiagnostics-color=always",
           "-g",          
-          "${fileDirname}/**.cpp",
-          "${fileDirname}/Render/**.cpp",
-          "${fileDirname}/Primitive/**.cpp",
-          "${fileDirname}/Object/**.cpp",
+          "${workspaceFolder}\\src\\main.cpp",
+          // "${workspaceFolder}/src/**.cpp",
+          "${workspaceFolder}/src/Render/**.cpp",
+          "${workspaceFolder}/src/Primitive/**.cpp",
+          "${workspaceFolder}/src/Object/**.cpp",
           "-L\"${workspaceFolder}\\..\\lib\\x64\"",
           "-I\"${workspaceFolder}\\..\\include\"",
           "-lopengl32",
           "-lfreeglut",
           "-lglu32",
           "-o",
-          "${fileDirname}\\${fileBasenameNoExtension}.exe"
+          "${workspaceFolder}\\src\\main.exe"
         ],
         "options": {
           "cwd": "${fileDirname}"
