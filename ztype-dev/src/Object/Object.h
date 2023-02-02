@@ -9,6 +9,7 @@ class Object
         bool setSize(float, float);
 
         Object(float, float, float, float);
+        Object(float, float, float, float, float, float);
         Object(float, float, float, float, float, float, float);
         Object(float, float, float);
         

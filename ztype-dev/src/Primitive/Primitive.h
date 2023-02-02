@@ -24,5 +24,5 @@ class Primitive
     private:
         float m_posX, m_posY, m_posZ, m_sizeX, m_sizeY, m_sizeZ;
         float m_colorR = 0.0f, m_colorG = 0.0f, m_colorB = 255.0f;
-        void setQuad(float, float, float, float, float, float);
+        void setQuad(float, float, float, float, float, float, int);
 };

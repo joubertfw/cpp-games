@@ -26,6 +26,7 @@
 Render *render;
 
 void display();
+void init();
 
 int main(int argc, char** argv)
 {
@@ -35,9 +36,11 @@ int main(int argc, char** argv)
 
   glutInitWindowSize(WIN_SIZE_X, WIN_SIZE_Y);
   glutCreateWindow(WIN_NAME);
-  gluOrtho2D(WIN_INI_SIZE_X, WIN_SIZE_X, WIN_INI_SIZE_Y, WIN_SIZE_Y);
-  glutFullScreen();
+  // gluOrtho2D(WIN_INI_SIZE_X, WIN_SIZE_X, WIN_INI_SIZE_Y, WIN_SIZE_Y);
+  glOrtho(WIN_INI_SIZE_X, WIN_SIZE_X, WIN_INI_SIZE_Y, WIN_SIZE_Y, -1000.0, 1000.0);
 
+  glutFullScreen();
+  init();
   glutDisplayFunc(&display);
   glutMainLoop();
 
@@ -47,4 +50,14 @@ int main(int argc, char** argv)
 void display()
 {
   render->Draw();
+}
+
+void init()
+{
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+  glClearDepth(1000.0f);                   // Set background depth to farthest
+  glEnable(GL_DEPTH_TEST);   // Enable depth testing for z-culling
+  glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
+  glShadeModel(GL_SMOOTH);   // Enable smooth shading
+  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }

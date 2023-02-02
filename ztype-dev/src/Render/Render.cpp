@@ -5,7 +5,7 @@
 
 Primitive *primitive = new Primitive(0.0f, 0.0f, 10.0f, 10.0f);
 
-Object *obj = new Object(0.0f, 0.0f, 10.0f, 10.0f);
+Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 
 void Render::Draw()
 {
@@ -31,7 +31,7 @@ void Render::Draw()
     // glutBitmapString(GLUT_BITMAP_HELVETICA_18,t);
     // glColor3f(1.0f, 0.0f, 0.0f);
 
-    obj->draw(&Primitive::Quad);
+    obj->draw(&Primitive::Cube);
 
   glPopMatrix();
 
