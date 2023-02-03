@@ -32,7 +32,8 @@ void Primitive::Cube()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     i++;
-    glRotatef(i/10, m_posX, m_posY, m_posZ);
+    // glTranslatef((m_posX + m_sizeX)/2, (m_posY + m_sizeY)/2, 0.0f);
+    glRotatef(i/10, 1.0f, 1.0f, 0.0f);
     glBegin(GL_QUADS);        
         // glColor3f(m_colorR, m_colorG, m_colorB);
 
