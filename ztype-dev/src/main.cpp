@@ -5,8 +5,8 @@
 
 #pragma region Defines
 
-  #define WIN_SIZE_X 800
-  #define WIN_SIZE_Y 600
+  #define WIN_SIZE_X 1920
+  #define WIN_SIZE_Y 1080
   #define WIN_INI_SIZE_X 0
   #define WIN_INI_SIZE_Y 0
   #define WIN_NAME "ztype-dev"

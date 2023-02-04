@@ -6,12 +6,12 @@ class Primitive
 
     public:
         void Quad();
-        void Cube();        
+        void Cube();
+        void Triangle();
+        void Grid();
         // void Quad(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor);
         void Trapeze(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor, float angulation);
-        void Triangle(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor);
-        void Line(float xScale, float xOfsset, float yOfsset, float initialColor, float endColor);
-        void Triangle(float xScale, float yScale, float xOfsset, float yOfsset);
+        void Line();
 
         void setColor(float, float, float);
 

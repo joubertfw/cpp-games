@@ -16,21 +16,8 @@ void Primitive::Quad()
     glEnd();
 }
 
-void Primitive::setQuad(float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ, int plane)
-{    
-    glBegin(GL_POLYGON);
-        glColor3f(m_colorR, m_colorG, m_colorB);
-        glVertex3f(posX, posY, posZ);
-        glVertex3f(posX + sizeX, posY, posZ);
-        glVertex3f(posX + sizeX, posY + sizeY, posZ);
-        glVertex3f(posX, posY + sizeY, 0.0);
-    glEnd();
-}
-
 void Primitive::Cube()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
     i++;
     // glTranslatef((m_posX + m_sizeX)/2, (m_posY + m_sizeY)/2, 0.0f);
     glRotatef(i/10, 1.0f, 1.0f, 0.0f);
@@ -89,31 +76,41 @@ void Primitive::setColor(float r, float g, float b)
     m_colorB = b;
 }
 
-void Primitive::Line(float xScale, float xOfsset, float yOfsset, float initialColor, float endColor)
+void Primitive::Grid()
 {
-    float yScale = 1.0;
-    glColor3f(initialColor, initialColor, initialColor);
-    glVertex3f(-xScale + xOfsset, yScale + yOfsset, 0.0);
-    glVertex3f(-xScale + xOfsset, -yScale + yOfsset, 0.0);
-    glColor3f(endColor, endColor, endColor);
-    glVertex3f(xScale + xOfsset, -yScale + yOfsset, 0.0);
-    glVertex3f(xScale + xOfsset, yScale + yOfsset, 0.0); 
+    glColor3f(0, 0, 100);
+    for (int i = 0; i < 10000; i+= 10)
+    {
+        glBegin(GL_LINES);
+            glVertex3f(i, 0, 0);
+            glVertex3f(i, 20000, 0);
+        glEnd();
+    }
+    for (int i = 0; i < 10000; i+= 10)
+    {
+        glBegin(GL_LINES);
+            glVertex3f(0, i, 0);
+            glVertex3f(20000, i, 0);
+        glEnd();
+    }
 }
 
-void Primitive::Triangle(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor)
+void Primitive::Line()
 {
-    glColor3f(initialColor, initialColor, initialColor);
-    glVertex3f(xScale + xOfsset, -yScale + yOfsset, 0.0); 
-    glColor3f(endColor, endColor, endColor);
-    glVertex3f(-xScale + xOfsset, -yScale + yOfsset, 0.0); 
-    glVertex3f(-xScale + xOfsset, yScale + yOfsset, 0.0); 
+    glBegin(GL_LINES);
+        glVertex3f(m_posX, m_posY, m_posZ);
+        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY, m_posZ + m_sizeZ);
+    glEnd();
 }
 
-void Primitive::Triangle(float xScale, float yScale, float xOfsset, float yOfsset)
+void Primitive::Triangle()
 {
-    glVertex3f(xScale + xOfsset, -yScale + yOfsset, 0.0); 
-    glVertex3f(-xScale + xOfsset, -yScale + yOfsset, 0.0); 
-    glVertex3f(-xScale + xOfsset, yScale + yOfsset, 0.0); 
+    glBegin(GL_POLYGON);
+        glColor3f(m_colorR, m_colorG, m_colorB);
+        glVertex3f(m_posX, m_posY, 0.0); 
+        glVertex3f(m_posX + (m_sizeX/2.0f), m_posY + m_sizeY, 0.0); 
+        glVertex3f(m_posX + m_sizeX, m_posY, 0.0); 
+    glEnd();
 }
 
 void Primitive::Trapeze(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor, float angulation)
@@ -128,7 +125,11 @@ void Primitive::Trapeze(float xScale, float yScale, float xOfsset, float yOfsset
 
 void Primitive::draw(Primitive Primitive::*function())
 {
+    glColor3f(m_colorR, m_colorG, m_colorB);
     function();
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // glMatrixMode(GL_MODELVIEW);
+
 }
 
 

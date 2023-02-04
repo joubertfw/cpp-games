@@ -7,6 +7,7 @@ class Object
         void draw(void (Primitive::*)());
         bool setPosition(float, float);
         bool setSize(float, float);
+        void setColor(float, float, float);
 
         Object(float, float, float, float);
         Object(float, float, float, float, float, float);
