@@ -5,38 +5,24 @@
 #include "../Text/Text.h"
 
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
+Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
+Object *text = new Object(200, 200, 200);
+Object *grid = new Object(0, 0, 0);
 
 void Render::Draw()
 {
-  obj->setColor(130.0f, 0.0f, 0.0f);
   // for (auto i = Objects.begin(); i != Objects.end(); ++i)
+
+  obj->setColor(130.0f, 0.0f, 0.0f);
   glClearColor(0.0, 0.0, 0.0, 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
 
-  // glRasterPos2i(50, 50);
-  // glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-  // const unsigned char* t2 = reinterpret_cast<const unsigned char *>("text to render");
-
-  // glutBitmapString(GLUT_BITMAP_HELVETICA_18,t2);
-  // glClear(GL_COLOR_BUFFER_BIT);
-
-  // /* Display a red square */
-  // glColor3f(1.0f, 0.0f, 0.0f);
-
   glPushMatrix();
-
-    // glRasterPos2i(0, 0);
-    // glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-    // const unsigned char* t = reinterpret_cast<const unsigned char *>("text to render");
-
-    // glutBitmapString(GLUT_BITMAP_HELVETICA_18,t);
-    // glColor3f(1.0f, 0.0f, 0.0f);
-
-    obj->draw(&Primitive::Grid);
-    obj->draw(&Primitive::Cube);
-    obj->draw(&Text::BasicText);
+    grid->draw(&Primitive::Grid);
+    cube->draw(&Primitive::Cube);
     obj->draw(&Primitive::Triangle);
+    text->draw(&Text::BasicText);
 
   glPopMatrix();
 

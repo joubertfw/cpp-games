@@ -20,51 +20,53 @@ void Primitive::Cube()
 {
     i++;
     // glTranslatef((m_posX + m_sizeX)/2, (m_posY + m_sizeY)/2, 0.0f);
-    glRotatef(i/10, 1.0f, 1.0f, 0.0f);
+    
+    Line();
+    glRotatef(i/10, m_posX, 0.0, 0.0);
     glBegin(GL_QUADS);        
         // glColor3f(m_colorR, m_colorG, m_colorB);
 
         // Top face (y = m_posY)
         glColor3f(0.0f, 1.0f, 0.0f);     // Green
-        glVertex3f(m_posX, m_posY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX + m_sizeX, m_posY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX + m_sizeX, m_posY,  m_posZ);
-        glVertex3f(m_posX, m_posY,  m_posZ);
+        glVertex3f(0.0f, 0.0f, m_sizeZ);
+        glVertex3f(m_sizeX, 0.0f, m_sizeZ);
+        glVertex3f(m_sizeX, 0.0f,  0.0f);
+        glVertex3f(0.0f, 0.0f,  0.0f);
     
-        // Bottom face (y = m_posY + m_sizeY)
+        // Bottom face (y = m_sizeY)
         glColor3f(1.0f, 0.5f, 0.0f);     // Orange
-        glVertex3f(m_posX, m_posY + m_sizeY,  m_posZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY,  m_posZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX, m_posY + m_sizeY, m_posZ + m_sizeZ);
+        glVertex3f(0.0f, m_sizeY,  0.0f);
+        glVertex3f(m_sizeX, m_sizeY,  0.0f);
+        glVertex3f(m_sizeX, m_sizeY, m_sizeZ);
+        glVertex3f(0.0f, m_sizeY, m_sizeZ);
     
-        // Front face  (z = m_posZ)
+        // Front face  (z = 0.0f)
         glColor3f(1.0f, 0.0f, 0.0f);     // Red
-        glVertex3f(m_posX,  m_posY, m_posZ);
-        glVertex3f(m_posX + m_sizeX,  m_posY, m_posZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY, m_posZ);
-        glVertex3f(m_posX, m_posY + m_sizeY, m_posZ);
+        glVertex3f(0.0f,  0.0f, 0.0f);
+        glVertex3f(m_sizeX,  0.0f, 0.0f);
+        glVertex3f(m_sizeX, m_sizeY, 0.0f);
+        glVertex3f(0.0f, m_sizeY, 0.0f);
     
-        // Back face (z = m_posZ + m_sizeZ)
+        // Back face (z = m_sizeZ)
         glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
-        glVertex3f(m_posX, m_posY + m_sizeY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX + m_sizeX, m_posY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX, m_posY, m_posZ + m_sizeZ);
+        glVertex3f(0.0f, m_sizeY, m_sizeZ);
+        glVertex3f(m_sizeX, m_sizeY, m_sizeZ);
+        glVertex3f(m_sizeX, 0.0f, m_sizeZ);
+        glVertex3f(0.0f, 0.0f, m_sizeZ);
     
         // Left face (x = -1.0f)
         glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-        glVertex3f(m_posX + m_sizeX, m_posY, m_posZ);
-        glVertex3f(m_posX + m_sizeX, m_posY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY, m_posZ + m_sizeZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY,  m_posZ);
+        glVertex3f(m_sizeX, 0.0f, 0.0f);
+        glVertex3f(m_sizeX, 0.0f, m_sizeZ);
+        glVertex3f(m_sizeX, m_sizeY, m_sizeZ);
+        glVertex3f(m_sizeX, m_sizeY,  0.0f);
     
         // Right face (x = 1.0f)
         glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
-        glVertex3f(m_sizeX, m_posY, m_posZ + m_sizeZ);
-        glVertex3f(m_sizeX,  m_posY,  m_posZ);
-        glVertex3f(m_sizeX, m_posY + m_sizeY,  m_posZ);
-        glVertex3f(m_sizeX, m_posY + m_sizeY, m_posZ + m_sizeZ);
+        glVertex3f(0.0f, 0.0f, m_sizeZ);
+        glVertex3f(0.0f, 0.0f,  0.0f);
+        glVertex3f(0.0f, m_sizeY,  0.0f);
+        glVertex3f(0.0f, m_sizeY, m_sizeZ);
 
     glEnd();
 }
@@ -97,9 +99,11 @@ void Primitive::Grid()
 
 void Primitive::Line()
 {
+    glColor3f(255, 255, 255);
+
     glBegin(GL_LINES);
-        glVertex3f(m_posX, m_posY, m_posZ);
-        glVertex3f(m_posX + m_sizeX, m_posY + m_sizeY, m_posZ + m_sizeZ);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(m_sizeX, m_sizeY, m_sizeZ);
     glEnd();
 }
 
@@ -107,19 +111,19 @@ void Primitive::Triangle()
 {
     glBegin(GL_POLYGON);
         glColor3f(m_colorR, m_colorG, m_colorB);
-        glVertex3f(m_posX, m_posY, 0.0); 
-        glVertex3f(m_posX + (m_sizeX/2.0f), m_posY + m_sizeY, 0.0); 
-        glVertex3f(m_posX + m_sizeX, m_posY, 0.0); 
+        glVertex3f(0.0f, 0.0f, 0.0); 
+        glVertex3f((m_sizeX/2.0f), m_sizeY, 0.0); 
+        glVertex3f(m_sizeX, 0.0f, 0.0); 
     glEnd();
 }
 
 void Primitive::draw(void (Primitive::*function)())
 {
-
-    
-    glColor3f(m_colorR, m_colorG, m_colorB);
-    (this->*function)();
-
+    glPushMatrix();
+        glColor3f(m_colorR, m_colorG, m_colorB);
+        glTranslatef(m_posX, m_posY, m_posZ);
+        (this->*function)();
+    glPopMatrix();
 }
 
 
@@ -140,5 +144,13 @@ Primitive::Primitive(float posX, float posY, float posZ, float sizeX, float size
     m_sizeX = sizeX;
     m_sizeY = sizeY;
     m_sizeZ = sizeZ;
+    m_title = reinterpret_cast<const unsigned char *>("Default title");
+}
+
+Primitive::Primitive(float posX, float posY, float posZ)
+{
+    m_posX = posX;
+    m_posY = posY;
+    m_posZ = posZ;
     m_title = reinterpret_cast<const unsigned char *>("Default title");
 }

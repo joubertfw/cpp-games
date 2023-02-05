@@ -22,6 +22,12 @@ Object::Object(float posX, float posY, float sizeX, float sizeY)
     m_text = new Text(posX, posY, 0.0f, "Default text");
 }
 
+Object::Object(float posX, float posY, float posZ)
+{
+    m_primitive = new Primitive(posX, posY, posZ);
+    m_text = new Text(posX, posY, posZ, "Default text");
+}
+
 Object::Object(float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ)
 {
     m_primitive = new Primitive(posX, posY, posZ, sizeX, sizeY, sizeZ);
