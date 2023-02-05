@@ -113,22 +113,12 @@ void Primitive::Triangle()
     glEnd();
 }
 
-void Primitive::Trapeze(float xScale, float yScale, float xOfsset, float yOfsset, float initialColor, float endColor, float angulation)
+void Primitive::draw(void (Primitive::*function)())
 {
-    glColor3f(initialColor, initialColor, initialColor);
-    glVertex3f(-xScale + xOfsset + angulation, yScale + yOfsset, 0.0);
-    glVertex3f(-xScale + xOfsset, -yScale + yOfsset, 0.0); 
-    glColor3f(endColor, endColor, endColor);
-    glVertex3f(xScale + xOfsset, -yScale + yOfsset, 0.0);
-    glVertex3f(xScale + xOfsset - angulation, yScale + yOfsset, 0.0); 
-}
 
-void Primitive::draw(Primitive Primitive::*function())
-{
+    
     glColor3f(m_colorR, m_colorG, m_colorB);
-    function();
-    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // glMatrixMode(GL_MODELVIEW);
+    (this->*function)();
 
 }
 
@@ -139,6 +129,7 @@ Primitive::Primitive(float posX, float posY, float sizeX, float sizeY)
     m_posY = posY;
     m_sizeX = sizeX;
     m_sizeY = sizeY;
+    m_title = reinterpret_cast<const unsigned char *>("Default title");
 }
 
 Primitive::Primitive(float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ)
@@ -149,4 +140,5 @@ Primitive::Primitive(float posX, float posY, float posZ, float sizeX, float size
     m_sizeX = sizeX;
     m_sizeY = sizeY;
     m_sizeZ = sizeZ;
+    m_title = reinterpret_cast<const unsigned char *>("Default title");
 }

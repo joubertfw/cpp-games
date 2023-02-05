@@ -12,6 +12,7 @@
           "${workspaceFolder}/src/Render/**.cpp",
           "${workspaceFolder}/src/Primitive/**.cpp",
           "${workspaceFolder}/src/Object/**.cpp",
+          "${workspaceFolder}/src/Text/**.cpp",
           "-L\"${workspaceFolder}\\..\\lib\\x64\"",
           "-I\"${workspaceFolder}\\..\\include\"",
           "-lopengl32",
