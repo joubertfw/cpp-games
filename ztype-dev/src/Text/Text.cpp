@@ -14,7 +14,9 @@ void Text::draw(void (Text::*function)())
     glTranslatef(m_posX, m_posY, m_posZ);
     glColor3f(m_colorR, m_colorG, m_colorB);
     (this->*function)();
-    m_posX += m_vel;
+    m_posX += m_velX;
+    m_posY += m_velY;
+    m_posZ += m_velZ;
 }
 
 
@@ -23,6 +25,8 @@ Text::Text(float posX, float posY, float posZ, const char* text)
     m_posX = posX;
     m_posY = posY;
     m_posZ = posZ;
-    m_vel = .02f;
+    m_velX = .02f;
+    m_velY = .02f;
+    m_velZ = .02f;
     m_title = reinterpret_cast<const unsigned char *>(text);
 }

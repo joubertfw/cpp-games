@@ -6,7 +6,7 @@
 
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
-Object *text = new Object(200, 200, 200);
+Object *text = new Object(200, 200, 0.0);
 Object *grid = new Object(0, 0, 0);
 
 void Render::Draw()
