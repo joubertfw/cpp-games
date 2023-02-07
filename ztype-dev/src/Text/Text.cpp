@@ -6,7 +6,7 @@
 void Text::BasicText()
 {
     glRasterPos3f(m_posX, m_posY, m_posZ);
-    glutBitmapString(GLUT_BITMAP_HELVETICA_18, m_title);
+    glutStrokeString(GLUT_STROKE_MONO_ROMAN, m_title);
 }
 
 void Text::draw(void (Text::*function)())
