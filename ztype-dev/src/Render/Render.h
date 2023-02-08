@@ -7,5 +7,7 @@ class Render
 {
     public:
         vector<int> Objects;
-        void Draw();
+        static void Draw();
+        static void Keyboard(unsigned char key, int mouseX, int mouseY);
+        Render();
 };
