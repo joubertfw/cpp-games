@@ -9,6 +9,9 @@ Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *text = new Object(200, 200, 100.0f);
 Object *grid = new Object(0, 0, 0);
 
+Game *instance;
+
+
 #pragma region Defines
 
   #define WIN_SIZE_X 1920
@@ -24,7 +27,7 @@ Object *grid = new Object(0, 0, 0);
 Game::Game()
 {
   glutInitWindowSize(WIN_SIZE_X, WIN_SIZE_Y);
-  glutCreateWindow(WIN_NAME);  
+  this->windowId = glutCreateWindow(WIN_NAME);
   glOrtho(WIN_INI_SIZE_X, WIN_SIZE_X, WIN_INI_SIZE_Y, WIN_SIZE_Y, WIN_Z_RANGE_MIN, WIN_Z_RANGE_MAX);
   glutFullScreen();  
 
@@ -38,13 +41,15 @@ Game::Game()
   glutDisplayFunc(Game::Draw);
   glutKeyboardFunc(Game::Keyboard);
 
+  instance = this;
+
   glutMainLoop();
 }
 
 Game::Game(int winSizeX, int winSizeY)
 {
   glutInitWindowSize(winSizeX, winSizeY);
-  glutCreateWindow(WIN_NAME);  
+  this->windowId = glutCreateWindow(WIN_NAME);
   glOrtho(WIN_INI_SIZE_X, winSizeX, WIN_INI_SIZE_Y, winSizeY, -1000.0, 1000.0);
   glutFullScreen();
 
@@ -57,6 +62,12 @@ Game::Game(int winSizeX, int winSizeY)
   glutDisplayFunc(Game::Draw);
   glutKeyboardFunc(Game::Keyboard);
 
+  instance = this;
+
+}
+
+void Game::Render()
+{
   glutMainLoop();
 }
 
@@ -90,7 +101,7 @@ void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 			glClearColor(1.0, 0.0, 0.0, 0.0);
 			break;
 		case 'r': 
-			glClearColor(0.0, 1.0, 0.0, 0.0);
+      glutDestroyWindow(instance->windowId);
 		break;
 		default:
          break;
