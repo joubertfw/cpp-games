@@ -1,6 +1,6 @@
 #include "Primitive.h"
 #include "../Object/Object.h"
-#include "../Render/Render.h"
+#include "../Game/Game.h"
 #include <GL/freeglut.h>
 
 int i = 0;

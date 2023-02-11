@@ -1,5 +1,5 @@
 #include <GL/freeglut.h>
-#include "Render.h"
+#include "Game.h"
 #include "../Object/Object.h"
 #include "../Primitive/Primitive.h"
 #include "../Text/Text.h"
@@ -15,15 +15,17 @@ Object *grid = new Object(0, 0, 0);
   #define WIN_SIZE_Y 1080
   #define WIN_INI_SIZE_X 0
   #define WIN_INI_SIZE_Y 0
+  #define WIN_Z_RANGE_MAX 1000
+  #define WIN_Z_RANGE_MIN -1000
   #define WIN_NAME "ztype-dev"
 
 #pragma endregion
 
-Render::Render()
+Game::Game()
 {
   glutInitWindowSize(WIN_SIZE_X, WIN_SIZE_Y);
   glutCreateWindow(WIN_NAME);  
-  glOrtho(WIN_INI_SIZE_X, WIN_SIZE_X, WIN_INI_SIZE_Y, WIN_SIZE_Y, -1000.0, 1000.0);
+  glOrtho(WIN_INI_SIZE_X, WIN_SIZE_X, WIN_INI_SIZE_Y, WIN_SIZE_Y, WIN_Z_RANGE_MIN, WIN_Z_RANGE_MAX);
   glutFullScreen();  
 
 
@@ -33,13 +35,32 @@ Render::Render()
   glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
   glShadeModel(GL_SMOOTH);   // Enable smooth shading
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-  glutDisplayFunc(Render::Draw);
-  glutKeyboardFunc(Render::Keyboard);
+  glutDisplayFunc(Game::Draw);
+  glutKeyboardFunc(Game::Keyboard);
 
   glutMainLoop();
 }
 
-void Render::Draw()
+Game::Game(int winSizeX, int winSizeY)
+{
+  glutInitWindowSize(winSizeX, winSizeY);
+  glutCreateWindow(WIN_NAME);  
+  glOrtho(WIN_INI_SIZE_X, winSizeX, WIN_INI_SIZE_Y, winSizeY, -1000.0, 1000.0);
+  glutFullScreen();
+
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+  glClearDepth(1000.0f);                   // Set background depth to farthest
+  glEnable(GL_DEPTH_TEST);   // Enable depth testing for z-culling
+  glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
+  glShadeModel(GL_SMOOTH);   // Enable smooth shading
+  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+  glutDisplayFunc(Game::Draw);
+  glutKeyboardFunc(Game::Keyboard);
+
+  glutMainLoop();
+}
+
+void Game::Draw()
 {
   // for (auto i = Objects.begin(); i != Objects.end(); ++i)
 
@@ -62,7 +83,7 @@ void Render::Draw()
   glFlush();
 };
 
-void Render::Keyboard(unsigned char key, int mouseX, int mouseY)
+void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
   switch (key){
 		case 'w':

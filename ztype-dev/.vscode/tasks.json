@@ -9,7 +9,7 @@
           "-g",          
           "${workspaceFolder}\\src\\main.cpp",
           // "${workspaceFolder}/src/**.cpp",
-          "${workspaceFolder}/src/Render/**.cpp",
+          "${workspaceFolder}/src/Game/**.cpp",
           "${workspaceFolder}/src/Primitive/**.cpp",
           "${workspaceFolder}/src/Object/**.cpp",
           "${workspaceFolder}/src/Text/**.cpp",

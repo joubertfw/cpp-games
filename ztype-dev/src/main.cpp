@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <GL/freeglut.h>
-#include "Render/Render.h"
+#include "Game/Game.h"
 
 #pragma region Defines
 
@@ -17,10 +17,10 @@
 
 int main(int argc, char** argv)
 {
-  Render *render;
+  Game *game;
   glutInit(&argc, argv);
 
-  render = new Render();
+  game = new Game(1200, 1200);
 
   return EXIT_SUCCESS;
 }

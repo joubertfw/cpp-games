@@ -3,11 +3,12 @@
 
 using namespace std;
 
-class Render
+class Game
 {
     public:
         vector<int> Objects;
         static void Draw();
-        static void Keyboard(unsigned char key, int mouseX, int mouseY);
-        Render();
+        static void Keyboard(unsigned char, int, int);
+        Game();
+        Game(int, int);
 };
