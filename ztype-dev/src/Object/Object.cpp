@@ -16,6 +16,11 @@ void Object::setColor(float r, float g, float b)
     m_primitive->setColor(r, g, b);
 }
 
+void Object::keyboard(unsigned char key, int mouseX, int mouseY)
+{
+    m_primitive->keyboard(key, mouseX, mouseY);
+}
+
 Object::Object(float posX, float posY, float sizeX, float sizeY)
 {
     m_primitive = new Primitive(posX, posY, sizeX, sizeY);

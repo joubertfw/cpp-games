@@ -124,6 +124,27 @@ void Primitive::draw(void (Primitive::*function)())
         glTranslatef(m_posX, m_posY, m_posZ);
         (this->*function)();
     glPopMatrix();
+
+    m_posX += m_velX;
+    m_posY += m_velY;
+    m_posZ += m_velZ;
+}
+
+void Primitive::keyboard(unsigned char key, int mouseX, int mouseY)
+{
+    m_velX = 0;
+    switch (key)
+    {
+    case 'w':
+        m_velX = 0.2;
+        break;
+    case 's':
+        m_velX = -0.2;
+        break;
+    
+    default:
+        break;
+    }
 }
 
 
@@ -133,6 +154,7 @@ Primitive::Primitive(float posX, float posY, float sizeX, float sizeY)
     m_posY = posY;
     m_sizeX = sizeX;
     m_sizeY = sizeY;
+    m_velX = m_velY = m_velZ = 0;
     m_title = reinterpret_cast<const unsigned char *>("Default title");
 }
 
@@ -144,6 +166,7 @@ Primitive::Primitive(float posX, float posY, float posZ, float sizeX, float size
     m_sizeX = sizeX;
     m_sizeY = sizeY;
     m_sizeZ = sizeZ;
+    m_velX = m_velY = m_velZ = 0;
     m_title = reinterpret_cast<const unsigned char *>("Default title");
 }
 
@@ -152,5 +175,6 @@ Primitive::Primitive(float posX, float posY, float posZ)
     m_posX = posX;
     m_posY = posY;
     m_posZ = posZ;
+    m_velX = m_velY = m_velZ = 0;
     m_title = reinterpret_cast<const unsigned char *>("Default title");
 }

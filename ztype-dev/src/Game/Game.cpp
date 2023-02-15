@@ -96,15 +96,6 @@ void Game::Draw()
 
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
-  switch (key){
-		case 'w':
-			glClearColor(1.0, 0.0, 0.0, 0.0);
-			break;
-		case 'r': 
-      glutDestroyWindow(instance->windowId);
-		break;
-		default:
-         break;
-	}
+  obj->keyboard(key, mouseX, mouseY);
   glutPostRedisplay();
 }

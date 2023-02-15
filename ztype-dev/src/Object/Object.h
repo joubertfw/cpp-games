@@ -11,6 +11,8 @@ class Object
         bool setSize(float, float);
         void setColor(float, float, float);
 
+        void keyboard(unsigned char, int, int);
+
         Object(float, float, float, float);
         Object(float, float, float, float, float, float);
         Object(float, float, float, float, float, float, float);
