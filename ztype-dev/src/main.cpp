@@ -22,7 +22,7 @@ int main(int argc, char** argv)
   // game2 = new Game(WIN_SIZE_X, WIN_SIZE_Y);
 
   game->Render();
-  // game2->Render();
+  game2->Render();
 
   return EXIT_SUCCESS;
 }
