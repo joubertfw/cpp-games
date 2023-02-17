@@ -24,17 +24,17 @@ void Object::keyboard(unsigned char key, int mouseX, int mouseY)
 Object::Object(float posX, float posY, float sizeX, float sizeY)
 {
     m_primitive = new Primitive(posX, posY, sizeX, sizeY);
-    m_text = new Text(posX, posY, 0.0f, "default");
+    m_text = new Text(posX, posY, 0.0f, "default1");
 }
 
 Object::Object(float posX, float posY, float posZ)
 {
     m_primitive = new Primitive(posX, posY, posZ);
-    m_text = new Text(posX, posY, posZ, "default");
+    m_text = new Text(posX, posY, posZ, "default2");
 }
 
 Object::Object(float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ)
 {
     m_primitive = new Primitive(posX, posY, posZ, sizeX, sizeY, sizeZ);
-    m_text = new Text(posX, posY, 0.0f, "default");
+    m_text = new Text(posX, posY, 0.0f, "default3");
 }

@@ -7,6 +7,7 @@
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *text = new Object(200, 200, 100.0f);
+Object *text2 = new Object(200, 200, 100.0f);
 Object *grid = new Object(0, 0, 0);
 
 Game *instance;
@@ -85,6 +86,7 @@ void Game::Draw()
     cube->draw(&Primitive::Cube);
     obj->draw(&Primitive::Triangle);
     text->draw(&Text::BasicText);
+    text2->draw(&Text::BasicText);
 
   glPopMatrix();
 
@@ -97,5 +99,6 @@ void Game::Draw()
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
   text->keyboard(key, mouseX, mouseY);
+  text2->keyboard(key, mouseX, mouseY);
   glutPostRedisplay();
 }
