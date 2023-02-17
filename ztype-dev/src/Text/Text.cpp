@@ -2,17 +2,30 @@
 #include "../Object/Object.h"
 #include "../Game/Game.h"
 #include <GL/freeglut.h>
+#include <string>
 
 void Text::BasicText()
 {
-    glRasterPos3f(m_posX, m_posY, m_posZ);
-    glutStrokeString(GLUT_STROKE_MONO_ROMAN, m_title);
+    glColor3f(m_colorR, 0, m_colorB);
+    glRasterPos2f(m_posX, m_posY);
+    int wd = 0;
+    for (int i = 0; i < this->m_textPos; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, m_title[i]);
+        wd += glutBitmapWidth(GLUT_BITMAP_HELVETICA_18, int(m_title[i]));
+    }
+    glColor3f(0, 0, m_colorB);
+    glRasterPos2f(m_posX + wd, m_posY);
+    // glColor3f(255, 255, 255);
+    for (int i = this->m_textPos; i < sizeof(m_title); i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, m_title[i]);
+    }
 }
 
 void Text::draw(void (Text::*function)())
 {
     glTranslatef(m_posX, m_posY, m_posZ);
-    glColor3f(m_colorR, m_colorG, m_colorB);
     (this->*function)();
     m_posX += m_velX;
     m_posY += m_velY;
@@ -28,5 +41,14 @@ Text::Text(float posX, float posY, float posZ, const char* text)
     m_velX = .02f;
     m_velY = .02f;
     m_velZ = .02f;
+    m_textPos = 0;
     m_title = reinterpret_cast<const unsigned char *>(text);
+}
+
+void Text::keyboard(unsigned char key, int mouseX, int mouseY)
+{
+    if(key == m_title[this->m_textPos])
+    {
+        this->m_textPos++;
+    }
 }

@@ -96,6 +96,6 @@ void Game::Draw()
 
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
-  obj->keyboard(key, mouseX, mouseY);
+  text->keyboard(key, mouseX, mouseY);
   glutPostRedisplay();
 }

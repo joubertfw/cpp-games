@@ -18,23 +18,23 @@ void Object::setColor(float r, float g, float b)
 
 void Object::keyboard(unsigned char key, int mouseX, int mouseY)
 {
-    m_primitive->keyboard(key, mouseX, mouseY);
+    m_text->keyboard(key, mouseX, mouseY);
 }
 
 Object::Object(float posX, float posY, float sizeX, float sizeY)
 {
     m_primitive = new Primitive(posX, posY, sizeX, sizeY);
-    m_text = new Text(posX, posY, 0.0f, "Default text");
+    m_text = new Text(posX, posY, 0.0f, "default");
 }
 
 Object::Object(float posX, float posY, float posZ)
 {
     m_primitive = new Primitive(posX, posY, posZ);
-    m_text = new Text(posX, posY, posZ, "Default text");
+    m_text = new Text(posX, posY, posZ, "default");
 }
 
 Object::Object(float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ)
 {
     m_primitive = new Primitive(posX, posY, posZ, sizeX, sizeY, sizeZ);
-    m_text = new Text(posX, posY, 0.0f, "Default text");
+    m_text = new Text(posX, posY, 0.0f, "default");
 }
