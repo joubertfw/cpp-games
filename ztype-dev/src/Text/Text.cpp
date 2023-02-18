@@ -7,18 +7,20 @@
 void Text::BasicText()
 {
     int wd = 0;
-    glColor3f(m_colorR, m_colorG, m_colorB);
+    glColor3ub(m_colorR, m_colorG, m_colorB);
     glRasterPos2f(m_posX, m_posY);
     for (int i = 0; i < this->m_textPos; i++)
     {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, m_title[i]);
-        wd += glutBitmapWidth(GLUT_BITMAP_HELVETICA_18, int(m_title[i]));
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, m_title[i]);
+        wd += glutBitmapWidth(GLUT_BITMAP_TIMES_ROMAN_24, int(m_title[i]));
     }
-    glColor3f(255.0f - m_colorR, 255.0f - m_colorG, 255.0f - m_colorB);
-    glRasterPos2f(m_posX + wd, m_posY);
-    for (int i = this->m_textPos; i < sizeof(m_title); i++)
+    glColor3ub(255 - m_colorR, 255 - m_colorG, 255 - m_colorB);
+    GLfloat *f = new GLfloat();
+    glGetFloatv(GL_CURRENT_RASTER_POSITION, f);
+    glRasterPos2f(*f, m_posY);
+    for (int i = this->m_textPos; i < strlen((const char *)m_title); i++)
     {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, m_title[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, m_title[i]);
     }
 }
 
@@ -37,10 +39,12 @@ Text::Text(float posX, float posY, float posZ, const char* text)
     m_posX = posX;
     m_posY = posY;
     m_posZ = posZ;
-    m_velX = m_velY = m_velZ = .02f;
+    m_velX = m_velY = m_velZ = .06f;
+    m_velX = 0;
     m_textPos = 0;
-    m_colorR = m_colorG = m_colorB = 0.0f;
-    m_colorG = 255.0f;
+    m_colorR = 0;
+    m_colorG = 200;
+    m_colorB = 50;
     m_title = reinterpret_cast<const unsigned char *>(text);
 }
 

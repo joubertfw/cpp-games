@@ -80,7 +80,7 @@ void Primitive::setColor(float r, float g, float b)
 
 void Primitive::Grid()
 {
-    glColor3f(0, 0, 100);
+    glColor3f(0, 0.2, 0.2);
     for (int i = 0; i < 10000; i+= 10)
     {
         glBegin(GL_LINES);

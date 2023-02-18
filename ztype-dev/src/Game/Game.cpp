@@ -56,7 +56,7 @@ Game::Game(int winSizeX, int winSizeY)
 {
   glutInitWindowSize(winSizeX, winSizeY);
   this->windowId = glutCreateWindow(WIN_NAME);
-  glOrtho(WIN_INI_SIZE_X, winSizeX, WIN_INI_SIZE_Y, winSizeY, -1000.0, 1000.0);
+  glOrtho(WIN_INI_SIZE_X, winSizeX, winSizeY, WIN_INI_SIZE_Y, -1000.0, 1000.0);
   glutFullScreen();
 
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
@@ -89,7 +89,7 @@ void Game::Draw()
 
   glPushMatrix();
     grid->draw(&Primitive::Grid);
-    cube->draw(&Primitive::Cube);
+    // cube->draw(&Primitive::Cube);
     // obj->draw(&Primitive::Triangle);
     // text->draw(&Text::BasicText);
     // text2->draw(&Text::BasicText);
@@ -109,17 +109,10 @@ void Game::Draw()
 
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
-  // text->keyboard(key, mouseX, mouseY);
-  // text2->keyboard(key, mouseX, mouseY);
   if(texts.front().keyboard(key, mouseX, mouseY))
   {
     texts.erase(texts.begin());
   }
-
-    // for (auto vtext = texts.begin(); vtext != texts.end(); ++vtext)
-    // {
-    //   vtext->keyboard(key, mouseX, mouseY);
-    // }
 
   glutPostRedisplay();
 }
@@ -127,8 +120,10 @@ void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 
 void Game::AllocateTexts()
 {
-  texts.push_back(*new Object(200, 300, 0, "texta"));
-  texts.push_back(*new Object(200, 400, 0, "textb"));
-  texts.push_back(*new Object(200, 500, 0, "textc"));
-  texts.push_back(*new Object(200, 600, 0, "textd"));
+  texts.push_back(*new Object(200, 0, 0, "EXAMPLE"));
+  texts.push_back(*new Object(400, -100, 0, "TEXT"));
+  texts.push_back(*new Object(600, -200, 0, "TESTING"));
+  texts.push_back(*new Object(800, -300, 0, "HELLO WORLD"));
+  texts.push_back(*new Object(800, 0, 0, "HI THERE"));
+  texts.push_back(*new Object(600, -100, 0, "SUP BRO"));
 }
