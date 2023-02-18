@@ -11,7 +11,7 @@ class Text
 
         void draw(void (Text::*function)());
         Text (float, float, float, const char*);
-        void keyboard(unsigned char, int, int);
+        bool keyboard(unsigned char, int, int);
 
     private:
         float m_posX, m_posY, m_posZ, m_sizeX, m_sizeY, m_sizeZ;

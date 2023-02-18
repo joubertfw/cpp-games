@@ -98,6 +98,7 @@ void Game::Draw()
     {
       vtext->draw(&Text::BasicText);
     }
+
   glPopMatrix();
 
   glutSwapBuffers();
@@ -108,8 +109,18 @@ void Game::Draw()
 
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
-  text->keyboard(key, mouseX, mouseY);
-  text2->keyboard(key, mouseX, mouseY);
+  // text->keyboard(key, mouseX, mouseY);
+  // text2->keyboard(key, mouseX, mouseY);
+  if(texts.front().keyboard(key, mouseX, mouseY))
+  {
+    texts.erase(texts.begin());
+  }
+
+    // for (auto vtext = texts.begin(); vtext != texts.end(); ++vtext)
+    // {
+    //   vtext->keyboard(key, mouseX, mouseY);
+    // }
+
   glutPostRedisplay();
 }
 

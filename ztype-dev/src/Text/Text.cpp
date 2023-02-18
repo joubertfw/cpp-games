@@ -44,15 +44,16 @@ Text::Text(float posX, float posY, float posZ, const char* text)
     m_title = reinterpret_cast<const unsigned char *>(text);
 }
 
-void Text::keyboard(unsigned char key, int mouseX, int mouseY)
+bool Text::keyboard(unsigned char key, int mouseX, int mouseY)
 {
     if(key == m_title[this->m_textPos])
     {
         this->m_textPos++;
     }
-    if(m_textPos == sizeof(m_title))
+    if(m_textPos == strlen((const char *)m_title))
     {
         m_textPos = 0;
-        delete this;
+        return true;
     }
+    return false;
 }

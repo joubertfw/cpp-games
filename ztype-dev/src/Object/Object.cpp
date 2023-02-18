@@ -16,7 +16,7 @@ void Object::setColor(float r, float g, float b)
     m_primitive->setColor(r, g, b);
 }
 
-void Object::keyboard(unsigned char key, int mouseX, int mouseY)
+bool Object::keyboard(unsigned char key, int mouseX, int mouseY)
 {
     m_text->keyboard(key, mouseX, mouseY);
 }
