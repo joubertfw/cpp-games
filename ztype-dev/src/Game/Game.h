@@ -9,6 +9,7 @@ class Game
         vector<int> Objects;
         static void Draw();
         static void Keyboard(unsigned char, int, int);
+        void AllocateTexts();
         void Render();
         Game();
         int windowId;

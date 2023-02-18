@@ -15,6 +15,7 @@ class Object
 
         Object(float, float, float, float);
         Object(float, float, float, float, float, float);
+        Object(float, float, float, const char *);
         Object(float, float, float, float, float, float, float);
         Object(float, float, float);
         

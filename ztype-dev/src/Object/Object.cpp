@@ -38,3 +38,8 @@ Object::Object(float posX, float posY, float posZ, float sizeX, float sizeY, flo
     m_primitive = new Primitive(posX, posY, posZ, sizeX, sizeY, sizeZ);
     m_text = new Text(posX, posY, 0.0f, "default3");
 }
+
+Object::Object(float posX, float posY, float posZ, const char * text)
+{
+    m_text = new Text(posX, posY, posZ, text);
+}

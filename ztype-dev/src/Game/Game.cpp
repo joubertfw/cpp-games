@@ -3,12 +3,15 @@
 #include "../Object/Object.h"
 #include "../Primitive/Primitive.h"
 #include "../Text/Text.h"
+#include <vector>
 
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *text = new Object(200, 200, 100.0f);
 Object *text2 = new Object(200, 200, 100.0f);
 Object *grid = new Object(0, 0, 0);
+
+std::vector<Object> texts;
 
 Game *instance;
 
@@ -42,6 +45,8 @@ Game::Game()
   glutDisplayFunc(Game::Draw);
   glutKeyboardFunc(Game::Keyboard);
 
+  this->AllocateTexts();
+
   instance = this;
 
   glutMainLoop();
@@ -63,6 +68,8 @@ Game::Game(int winSizeX, int winSizeY)
   glutDisplayFunc(Game::Draw);
   glutKeyboardFunc(Game::Keyboard);
 
+  this->AllocateTexts();
+
   instance = this;
 
 }
@@ -74,7 +81,6 @@ void Game::Render()
 
 void Game::Draw()
 {
-  // for (auto i = Objects.begin(); i != Objects.end(); ++i)
 
   obj->setColor(130.0f, 0.0f, 0.0f);
   // glClearColor(0.0, 0.0, 0.0, 1);
@@ -84,10 +90,14 @@ void Game::Draw()
   glPushMatrix();
     grid->draw(&Primitive::Grid);
     cube->draw(&Primitive::Cube);
-    obj->draw(&Primitive::Triangle);
-    text->draw(&Text::BasicText);
-    text2->draw(&Text::BasicText);
+    // obj->draw(&Primitive::Triangle);
+    // text->draw(&Text::BasicText);
+    // text2->draw(&Text::BasicText);
 
+    for (auto vtext = texts.begin(); vtext != texts.end(); ++vtext)
+    {
+      vtext->draw(&Text::BasicText);
+    }
   glPopMatrix();
 
   glutSwapBuffers();
@@ -101,4 +111,13 @@ void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
   text->keyboard(key, mouseX, mouseY);
   text2->keyboard(key, mouseX, mouseY);
   glutPostRedisplay();
+}
+
+
+void Game::AllocateTexts()
+{
+  texts.push_back(*new Object(200, 300, 0, "texta"));
+  texts.push_back(*new Object(200, 400, 0, "textb"));
+  texts.push_back(*new Object(200, 500, 0, "textc"));
+  texts.push_back(*new Object(200, 600, 0, "textd"));
 }

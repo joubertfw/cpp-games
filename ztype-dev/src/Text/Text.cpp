@@ -24,7 +24,7 @@ void Text::BasicText()
 
 void Text::draw(void (Text::*function)())
 {
-    glTranslatef(m_posX, m_posY, m_posZ);
+    // glTranslatef(m_posX, m_posY, m_posZ);
     (this->*function)();
     m_posX += m_velX;
     m_posY += m_velY;
