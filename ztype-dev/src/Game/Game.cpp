@@ -18,9 +18,13 @@ Object *text2 = new Object(200, 200, 100.0f);
 Object *grid = new Object(0, 0, 0);
 
 std::vector<Object> texts;
+Object *gameOverText;
 
 Game *instance;
+unsigned int gameState = 0;
 
+vector<Object>::iterator typing;
+bool isTyping = false;
 
 #pragma region Defines
 
@@ -31,6 +35,8 @@ Game *instance;
   #define WIN_Z_RANGE_MAX 1000
   #define WIN_Z_RANGE_MIN -1000
   #define WIN_NAME "ztype-dev"
+  #define GAME_OK 0
+  #define GAME_OVER 1
 
 #pragma endregion
 
@@ -92,6 +98,14 @@ void Game::Draw()
   // glClearColor(0.0, 0.0, 0.0, 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
+  if(!isTyping)
+  {
+    sort(texts.begin(), texts.end());
+  }
+  if(texts.begin()->m_text->m_posY > 1080)
+  {
+    gameState = GAME_OVER;
+  }
 
   glPushMatrix();
     grid->draw(&Primitive::Grid);
@@ -100,9 +114,16 @@ void Game::Draw()
     // text->draw(&Text::BasicText);
     // text2->draw(&Text::BasicText);
 
-    for (auto vtext = texts.begin(); vtext != texts.end(); ++vtext)
+    if(gameState == GAME_OK)
     {
-      vtext->draw(&Text::BasicText);
+      for (auto vtext = texts.begin(); vtext != texts.end(); ++vtext)
+      {
+        vtext->draw(&Text::BasicText);
+      }
+    }
+    else
+    {
+      gameOverText->draw(&Text::BasicText);
     }
 
   glPopMatrix();
@@ -113,15 +134,10 @@ void Game::Draw()
   glFlush();
 };
 
-vector<Object>::iterator typing;
-bool isTyping = false;
 
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
-  if(!isTyping)
-  {
-    sort(texts.begin(), texts.end());
-  }
+
 
   for (vector<Object>::iterator vtext = texts.begin(); vtext != texts.end() && !isTyping; ++vtext)
   {
@@ -156,6 +172,8 @@ void Game::AllocateTexts()
   }
 
   MyReadFile.close();
+
+  gameOverText = new Object(600, 600, 0, "Game Over");
   
   
   // texts.push_back(*new Object(400, -100, 0, "TEXT"));
