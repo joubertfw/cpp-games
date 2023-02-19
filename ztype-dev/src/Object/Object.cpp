@@ -1,5 +1,8 @@
 #include "../Primitive/Primitive.h"
 #include "Object.h"
+#include <string>
+
+using namespace std;
 
 void Object::draw(void (Primitive::*function)())
 {
@@ -18,28 +21,33 @@ void Object::setColor(float r, float g, float b)
 
 bool Object::keyboard(unsigned char key, int mouseX, int mouseY)
 {
-    m_text->keyboard(key, mouseX, mouseY);
+    return m_text->keyboard(key, mouseX, mouseY);
 }
 
 Object::Object(float posX, float posY, float sizeX, float sizeY)
 {
     m_primitive = new Primitive(posX, posY, sizeX, sizeY);
-    m_text = new Text(posX, posY, 0.0f, "default1");
+    m_text = new Text(posX, posY, 0.0f, *new string("default"));
 }
 
 Object::Object(float posX, float posY, float posZ)
 {
     m_primitive = new Primitive(posX, posY, posZ);
-    m_text = new Text(posX, posY, posZ, "default2");
+    m_text = new Text(posX, posY, posZ, *new string("default"));
 }
 
 Object::Object(float posX, float posY, float posZ, float sizeX, float sizeY, float sizeZ)
 {
     m_primitive = new Primitive(posX, posY, posZ, sizeX, sizeY, sizeZ);
-    m_text = new Text(posX, posY, 0.0f, "default3");
+    m_text = new Text(posX, posY, 0.0f, *new string("default"));
 }
 
-Object::Object(float posX, float posY, float posZ, const char * text)
+Object::Object(float posX, float posY, float posZ, string text)
 {
     m_text = new Text(posX, posY, posZ, text);
+}
+
+bool Object::checkKey(char key)
+{
+    return m_text->checkKey(key);
 }

@@ -6,6 +6,10 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
 
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
@@ -109,11 +113,23 @@ void Game::Draw()
   glFlush();
 };
 
+vector<Object>::iterator typing;
+bool isTyping = false;
+
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
-  if(texts.front().keyboard(key, mouseX, mouseY))
+
+  for (vector<Object>::iterator vtext = texts.begin(); vtext != texts.end() && !isTyping; ++vtext)
   {
-    texts.erase(texts.begin());
+    isTyping = vtext->checkKey(key);
+    typing = vtext;
+  }
+
+
+  if(typing->keyboard(key, mouseX, mouseY))
+  {
+    texts.erase(typing);
+    isTyping = false;
   }
 
   glutPostRedisplay();
@@ -130,15 +146,16 @@ void Game::AllocateTexts()
   // Use a while loop together with the getline() function to read the file line by line
   for (int i = 0; getline (MyReadFile, myText); i++) {
     // Output the text from the file
-    const char * cc = myText.c_str();
-    texts.push_back(*new Object(200, (-10) * i, 0, "test"));
+    texts.push_back(*new Object(((300) * i) % 1920, (-20) * i, 0, myText));
     cout << myText;
   }
+
+  MyReadFile.close();
   
   
-  texts.push_back(*new Object(400, -100, 0, "TEXT"));
-  texts.push_back(*new Object(600, -200, 0, "TESTING"));
-  texts.push_back(*new Object(800, -300, 0, "HELLO WORLD"));
-  texts.push_back(*new Object(800, 0, 0, "HI THERE"));
-  texts.push_back(*new Object(600, -100, 0, "SUP BRO"));
+  // texts.push_back(*new Object(400, -100, 0, "TEXT"));
+  // texts.push_back(*new Object(600, -200, 0, "TESTING"));
+  // texts.push_back(*new Object(800, -300, 0, "HELLO WORLD"));
+  // texts.push_back(*new Object(800, 0, 0, "HI THERE"));
+  // texts.push_back(*new Object(600, -100, 0, "SUP BRO"));
 }

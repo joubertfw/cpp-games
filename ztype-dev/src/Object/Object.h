@@ -1,6 +1,9 @@
 #pragma once
 #include "../Primitive/Primitive.h"
 #include "../Text/Text.h"
+#include <string>
+
+using namespace std;
 
 class Object
 {
@@ -10,12 +13,13 @@ class Object
         bool setPosition(float, float);
         bool setSize(float, float);
         void setColor(float, float, float);
+        bool checkKey(char key);
 
         bool keyboard(unsigned char, int, int);
 
         Object(float, float, float, float);
         Object(float, float, float, float, float, float);
-        Object(float, float, float, const char *);
+        Object(float, float, float, string);
         Object(float, float, float, float, float, float, float);
         Object(float, float, float);
         
