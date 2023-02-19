@@ -118,13 +118,16 @@ bool isTyping = false;
 
 void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 {
+  if(!isTyping)
+  {
+    sort(texts.begin(), texts.end());
+  }
 
   for (vector<Object>::iterator vtext = texts.begin(); vtext != texts.end() && !isTyping; ++vtext)
   {
     isTyping = vtext->checkKey(key);
     typing = vtext;
   }
-
 
   if(typing->keyboard(key, mouseX, mouseY))
   {
@@ -143,8 +146,10 @@ void Game::AllocateTexts()
 // Read from the text file
   ifstream MyReadFile("words");
 
+
   // Use a while loop together with the getline() function to read the file line by line
-  for (int i = 0; getline (MyReadFile, myText); i++) {
+  for (int i = 0; getline (MyReadFile, myText); i++) 
+  {
     // Output the text from the file
     texts.push_back(*new Object(((300) * i) % 1920, (-20) * i, 0, myText));
     cout << myText;

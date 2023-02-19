@@ -51,3 +51,9 @@ bool Object::checkKey(char key)
 {
     return m_text->checkKey(key);
 }
+
+bool Object::operator<(const Object& b) 
+{
+
+    return b.m_text->m_posY < this->m_text->m_posY;
+}

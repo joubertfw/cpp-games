@@ -22,10 +22,11 @@ class Object
         Object(float, float, float, string);
         Object(float, float, float, float, float, float, float);
         Object(float, float, float);
-        
+        float m_posX, m_posY, m_sizeX, m_sizeY;
+        bool operator<(const Object& b);
+        Text *m_text;
+
     private:
         Primitive *m_primitive;
-        Text *m_text;
-        float m_posX, m_posY, m_sizeX, m_sizeY;
         float m_colorR, m_colorG, m_colorB;
 };

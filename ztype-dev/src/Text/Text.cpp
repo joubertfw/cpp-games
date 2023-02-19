@@ -39,7 +39,7 @@ Text::Text(float posX, float posY, float posZ, string text)
     m_posX = posX;
     m_posY = posY;
     m_posZ = posZ;
-    m_velY = .05f;
+    m_velY = .01f + 4*(.1f/(float)(text.length()));
     m_velX = 0.0f;
     m_velZ = 0.0f;
     m_textPos = 0;
