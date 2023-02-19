@@ -39,7 +39,7 @@ Text::Text(float posX, float posY, float posZ, const char* text)
     m_posX = posX;
     m_posY = posY;
     m_posZ = posZ;
-    m_velX = m_velY = m_velZ = .06f;
+    m_velX = m_velY = m_velZ = .6f;
     m_velX = 0;
     m_textPos = 0;
     m_colorR = 0;

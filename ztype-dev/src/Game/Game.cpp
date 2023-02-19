@@ -4,6 +4,8 @@
 #include "../Primitive/Primitive.h"
 #include "../Text/Text.h"
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
@@ -120,7 +122,20 @@ void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 
 void Game::AllocateTexts()
 {
-  texts.push_back(*new Object(200, 0, 0, "EXAMPLE"));
+  string myText;
+
+// Read from the text file
+  ifstream MyReadFile("words");
+
+  // Use a while loop together with the getline() function to read the file line by line
+  for (int i = 0; getline (MyReadFile, myText); i++) {
+    // Output the text from the file
+    const char * cc = myText.c_str();
+    texts.push_back(*new Object(200, (-10) * i, 0, "test"));
+    cout << myText;
+  }
+  
+  
   texts.push_back(*new Object(400, -100, 0, "TEXT"));
   texts.push_back(*new Object(600, -200, 0, "TESTING"));
   texts.push_back(*new Object(800, -300, 0, "HELLO WORLD"));
