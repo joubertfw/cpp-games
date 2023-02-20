@@ -107,6 +107,13 @@ void Primitive::Line()
     glEnd();
 }
 
+void Primitive::setVelocity(float x, float y, float z)
+{
+    m_velX = x;
+    m_velY = y;
+    m_velZ = z;
+}
+
 void Primitive::Triangle()
 {
     glBegin(GL_POLYGON);

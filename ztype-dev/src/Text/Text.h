@@ -11,6 +11,7 @@ class Text
         void BasicText();
 
         void setColor(float, float, float);
+        void setVelocity(float, float, float);
 
         void draw(void (Text::*function)());
         Text (float, float, float, string);

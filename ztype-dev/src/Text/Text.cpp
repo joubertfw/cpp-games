@@ -49,6 +49,12 @@ Text::Text(float posX, float posY, float posZ, string text)
     m_title = text;
 }
 
+void Text::setVelocity(float x, float y, float z)
+{
+    m_velX = x;
+    m_velY = y;
+    m_velZ = z;
+}
 bool Text::keyboard(unsigned char key, int mouseX, int mouseY)
 {
     if(key == m_title[this->m_textPos])

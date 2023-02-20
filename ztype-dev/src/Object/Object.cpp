@@ -18,6 +18,16 @@ void Object::setColor(float r, float g, float b)
 {
     m_primitive->setColor(r, g, b);
 }
+/*Set velocity of object.
+x: velocity on x axis
+y: velocity on y axis
+z: velocity on z axis
+*/
+void Object::setVelocity(float x, float y, float z)
+{
+    m_primitive->setVelocity(x, y, z);
+    m_text->setVelocity(x, y, z);
+}
 
 bool Object::keyboard(unsigned char key, int mouseX, int mouseY)
 {
@@ -44,6 +54,7 @@ Object::Object(float posX, float posY, float posZ, float sizeX, float sizeY, flo
 
 Object::Object(float posX, float posY, float posZ, string text)
 {
+    m_primitive = new Primitive(posX, posY, posZ);
     m_text = new Text(posX, posY, posZ, text);
 }
 

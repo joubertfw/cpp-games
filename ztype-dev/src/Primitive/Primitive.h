@@ -14,6 +14,7 @@ class Primitive
         void setColor(float, float, float);
 
         void draw(void (Primitive::*function)());
+        void setVelocity(float, float, float);
 
         void keyboard(unsigned char, int, int);
 

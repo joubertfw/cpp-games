@@ -25,6 +25,7 @@ class Object
         float m_posX, m_posY, m_sizeX, m_sizeY;
         bool operator<(const Object& b);
         Text *m_text;
+        void setVelocity(float, float, float);
 
     private:
         Primitive *m_primitive;
