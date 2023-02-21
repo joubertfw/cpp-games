@@ -26,8 +26,8 @@ class Object
         bool operator<(const Object& b);
         Text *m_text;
         void setVelocity(float, float, float);
+        Primitive *m_primitive;
 
     private:
-        Primitive *m_primitive;
         float m_colorR, m_colorG, m_colorB;
 };

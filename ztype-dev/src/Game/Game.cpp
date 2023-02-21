@@ -28,6 +28,7 @@ unsigned int level;
 std::vector<Object> texts;
 std::vector<string> words;
 Object *gameOverText;
+Object *gameOverText2;
 
 Game *instance;
 unsigned int gameState = 0;
@@ -127,24 +128,15 @@ void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 
 void Game::StartNewLevel()
 {
-  int counter = 0;
-
   texts.clear();
   srand(time(NULL));
 
-  for(auto word : words)
+  for(int i = 0; i <  3 + (level * 1); i++)
   {
-    if(counter < 3 + (level * 1))
-    {
-      texts.push_back(*new Object(rand() % (WIN_SIZE_X - (word.length()*10)), (-250) * counter, 0, word));
-      texts.back().setVelocity(0, 0.02f + (level * 0.005f), 0);
-      texts.back().setSize(15.0f, 15.0f);
-      counter++;
-    }
-    else
-    {
-      break;
-    }
+    string word = words[rand() % words.size()];
+    texts.push_back(*new Object(rand() % (WIN_SIZE_X - (word.length() * 10)), (-25) * i, 0, word));
+    texts.back().setVelocity(0, 0.06f + (level * 0.005f) - (word.length() * 0.005f) , 0);
+    texts.back().setSize(15.0f, 15.0f);
   }
 }
 
@@ -166,6 +158,7 @@ void Game::AllocateTexts()
   MyReadFile.close();
 
   gameOverText = new Object(340, 350, 0, "Game Over");
+  gameOverText2 = new Object(315, 370, 0, "press r to restart");
   
   
   // texts.push_back(*new Object(400, -100, 0, "TEXT"));
@@ -181,10 +174,10 @@ void GameLogicKeyboard(char k, int x, int y)
   {
     for (vector<Object>::iterator vtext = texts.begin(); vtext != texts.end() && !isTyping; ++vtext)
     {
-      isTyping = vtext->checkKey(k) && vtext->m_text->m_posY >= 0;
+      isTyping = vtext->checkKey(k);
       typing = vtext;
     }
-
+    
     // true when finish typing
     if(typing->keyboard(k, x, y))
     {
@@ -220,7 +213,9 @@ void GameLogicRender()
   else
   {
     gameOverText->setVelocity(0, 0, 0);
+    gameOverText2->setVelocity(0, 0, 0);
     gameOverText->draw(&Text::BasicText);
+    gameOverText2->draw(&Text::BasicText);
   }
 
   if(texts.begin() == texts.end())

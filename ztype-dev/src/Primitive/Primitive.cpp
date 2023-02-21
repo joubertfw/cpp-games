@@ -114,6 +114,12 @@ void Primitive::setVelocity(float x, float y, float z)
     m_velZ = z;
 }
 
+void Primitive::setPosition(float x, float y)
+{
+    m_posX = x;
+    m_posY = y;
+}
+
 void Primitive::setSize(float sizeX, float sizeY)
 {
     m_sizeX = sizeX;

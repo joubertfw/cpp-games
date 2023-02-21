@@ -14,6 +14,11 @@ void Object::draw(void (Text::*function)())
     m_text->draw(function);
 }
 
+bool Object::setPosition(float x, float y)
+{
+    m_primitive->setPosition(x, y);
+}
+
 bool Object::setSize(float sizeX, float sizeY)
 {
     m_primitive->setSize(sizeX, sizeY);
