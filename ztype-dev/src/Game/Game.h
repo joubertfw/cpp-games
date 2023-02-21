@@ -10,6 +10,7 @@ class Game
         static void Draw();
         static void Keyboard(unsigned char, int, int);
         void AllocateTexts();
+        void StartNewLevel();
         void Render();
         Game();
         int windowId;

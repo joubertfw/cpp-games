@@ -114,6 +114,12 @@ void Primitive::setVelocity(float x, float y, float z)
     m_velZ = z;
 }
 
+void Primitive::setSize(float sizeX, float sizeY)
+{
+    m_sizeX = sizeX;
+    m_sizeY = sizeY;
+}
+
 void Primitive::Triangle()
 {
     glBegin(GL_POLYGON);

@@ -8,11 +8,14 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <time.h>
 
 using namespace std;
 
 void GameLogicKeyboard(char, int, int);
 void GameLogicRender();
+
+#pragma region Variables
 
 Object *obj = new Object(100.0f, 100.0f, 0.0f, 100.0f, 100.0f, 100.0f);
 Object *cube = new Object(500.0f, 500.0f, 0.0f, 100.0f, 100.0f, 100.0f);
@@ -23,6 +26,7 @@ Object *grid = new Object(0, 0, 0);
 unsigned int level;
 
 std::vector<Object> texts;
+std::vector<string> words;
 Object *gameOverText;
 
 Game *instance;
@@ -30,6 +34,7 @@ unsigned int gameState = 0;
 
 vector<Object>::iterator typing;
 bool isTyping = false;
+#pragma endregion
 
 #pragma region Defines
 
@@ -120,6 +125,28 @@ void Game::Keyboard(unsigned char key, int mouseX, int mouseY)
 }
 
 
+void Game::StartNewLevel()
+{
+  int counter = 0;
+
+  texts.clear();
+  srand(time(NULL));
+
+  for(auto word : words)
+  {
+    if(counter < 3 + (level * 1))
+    {
+      texts.push_back(*new Object(rand() % (WIN_SIZE_X - (word.length()*10)), (-250) * counter, 0, word));
+      texts.back().setVelocity(0, 0.02f + (level * 0.005f), 0);
+      texts.back().setSize(15.0f, 15.0f);
+      counter++;
+    }
+    else
+    {
+      break;
+    }
+  }
+}
 
 
 void Game::AllocateTexts()
@@ -133,9 +160,7 @@ void Game::AllocateTexts()
   // Use a while loop together with the getline() function to read the file line by line
   for (int i = 0; getline (MyReadFile, myText); i++) 
   {
-    texts.push_back(*new Object(((300) * i) % WIN_SIZE_X, (-20) * i, 0, myText));
-    texts.back().setVelocity(0, 0.03f + (level * 0.01f), 0);
-    cout << myText;
+    words.push_back(myText);
   }
 
   MyReadFile.close();
@@ -152,29 +177,32 @@ void Game::AllocateTexts()
 
 void GameLogicKeyboard(char k, int x, int y)
 {
-  for (vector<Object>::iterator vtext = texts.begin(); vtext != texts.end() && !isTyping; ++vtext)
+  if(gameState == GAME_OK)
   {
-    isTyping = vtext->checkKey(k);
-    typing = vtext;
-  }
+    for (vector<Object>::iterator vtext = texts.begin(); vtext != texts.end() && !isTyping; ++vtext)
+    {
+      isTyping = vtext->checkKey(k) && vtext->m_text->m_posY >= 0;
+      typing = vtext;
+    }
 
-  if(typing->keyboard(k, x, y))
+    // true when finish typing
+    if(typing->keyboard(k, x, y))
+    {
+      texts.erase(typing);
+      isTyping = false;
+    }
+  }
+  else if(gameState == GAME_OVER && k == 'r')
   {
-    texts.erase(typing);
     isTyping = false;
+    gameState = GAME_OK;
+    level = 0;
+    instance->StartNewLevel();
   }
 }
 
 void GameLogicRender()
 {
-  if(!isTyping)
-  {
-    sort(texts.begin(), texts.end());
-  }
-  if(texts.begin()->m_text->m_posY > WIN_SIZE_Y)
-  {
-    gameState = GAME_OVER;
-  }
   grid->draw(&Primitive::Grid);
 
   if(gameState == GAME_OK)
@@ -182,6 +210,11 @@ void GameLogicRender()
     for (auto vtext = texts.begin(); vtext != texts.end(); ++vtext)
     {
       vtext->draw(&Text::BasicText);
+      vtext->draw(&Primitive::Triangle);
+      if(vtext->m_text->m_posY > WIN_SIZE_Y)
+      {
+        gameState = GAME_OVER;
+      }
     }
   }
   else
@@ -193,6 +226,6 @@ void GameLogicRender()
   if(texts.begin() == texts.end())
   {
     level++;
-    instance->AllocateTexts();
+    instance->StartNewLevel();
   }
 }

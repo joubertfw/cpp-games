@@ -57,15 +57,17 @@ void Text::setVelocity(float x, float y, float z)
 }
 bool Text::keyboard(unsigned char key, int mouseX, int mouseY)
 {
-    if(key == m_title[this->m_textPos])
+    if(key == m_title[this->m_textPos] && m_posY >= 0)
     {
         this->m_textPos++;
     }
+
     if(m_textPos == m_title.length())
     {
         m_textPos = 0;
         return true;
     }
+    
     return false;
 }
 

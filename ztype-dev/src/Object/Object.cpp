@@ -14,6 +14,11 @@ void Object::draw(void (Text::*function)())
     m_text->draw(function);
 }
 
+bool Object::setSize(float sizeX, float sizeY)
+{
+    m_primitive->setSize(sizeX, sizeY);
+}
+
 void Object::setColor(float r, float g, float b)
 {
     m_primitive->setColor(r, g, b);
