@@ -2,10 +2,8 @@
 #include "../Object/Object.h"
 #include "../Game/Game.h"
 #include <GL/freeglut.h>
-#include <glad/glad.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <GLFW/glfw3.h>
 
 int i = 0;
 
@@ -132,15 +130,6 @@ void Primitive::setSize(float sizeX, float sizeY)
 
 void Primitive::Triangle()
 {
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f
-    };
-
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    
     glBegin(GL_POLYGON);
         glColor3f(m_colorR, m_colorG, m_colorB);
         glVertex3f(0.0f, 0.0f, 0.0); 
