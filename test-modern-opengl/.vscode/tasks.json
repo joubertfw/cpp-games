@@ -10,7 +10,7 @@
           "${workspaceFolder}\\src\\main.cpp",
           // "${workspaceFolder}/src/**.cpp",
           "-L\"${workspaceFolder}\\..\\lib\\x64\"",
-          "-I\"${workspaceFolder}\\..\\include\"",
+          "-I\"${workspaceFolder}\\Dependencies\\GLFW\\include\"",
           "-lglfw3",
           "-lopengl32",
           "-luser32",
