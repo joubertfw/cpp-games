@@ -9,7 +9,7 @@
           "-g",          
           "${workspaceFolder}\\src\\main.cpp",
           // "${workspaceFolder}/src/**.cpp",
-          "-L\"${workspaceFolder}\\..\\lib\\x64\"",
+          "-L\"${workspaceFolder}\\Dependencies\\GLFW\\lib\"",
           "-I\"${workspaceFolder}\\Dependencies\\GLFW\\include\"",
           "-lglfw3",
           "-lopengl32",
