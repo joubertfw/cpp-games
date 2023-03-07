@@ -6,17 +6,23 @@
         "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
         "args": [
           "-fdiagnostics-color=always",
-          "-g",          
+          "-c",
+          "-g",
           "${workspaceFolder}\\src\\main.cpp",
+          "-D_GLEW_STATIC",
           // "${workspaceFolder}/src/**.cpp",
           "-L\"${workspaceFolder}\\Dependencies\\GLFW\\lib\"",
+          "-L\"${workspaceFolder}\\Dependencies\\GLEW\\lib\\Release\\x64\"",
           "-I\"${workspaceFolder}\\Dependencies\\GLFW\\include\"",
+          "-I\"${workspaceFolder}\\Dependencies\\GLEW\\include\"",
+          "-lglew32s",
           "-lglfw3",
           "-lopengl32",
           "-luser32",
-          "-lgdi32",          
+          "-lgdi32",
           "-o",
           "${workspaceFolder}\\src\\main.exe"
+
         ],
         "options": {
           "cwd": "${fileDirname}"
