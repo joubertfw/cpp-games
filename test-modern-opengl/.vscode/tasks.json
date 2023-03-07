@@ -1,12 +1,11 @@
 {
     "tasks": [
       {
-        "type": "cppbuild",
+        "type": "shell",
         "label": "C/C++: g++.exe build active file",
         "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
         "args": [
           "-fdiagnostics-color=always",
-          "-c",
           "-g",
           "${workspaceFolder}\\src\\main.cpp",
           "-D_GLEW_STATIC",
