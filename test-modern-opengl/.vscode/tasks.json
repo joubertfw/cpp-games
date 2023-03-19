@@ -1,7 +1,7 @@
 {
     "tasks": [
       {
-        "type": "shell",
+        "type": "cppbuild",
         "label": "C/C++: g++.exe build active file",
         "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
         "args": [
@@ -21,7 +21,6 @@
           "-lgdi32",
           "-o",
           "${workspaceFolder}\\src\\main.exe"
-
         ],
         "options": {
           "cwd": "${fileDirname}"
