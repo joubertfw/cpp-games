@@ -6,7 +6,7 @@
 
 static int CompileShader(unsigned int type, const std::string& shader)
 {
-    unsigned int id = glCreateShader(GL_VERTEX_SHADER);
+    unsigned int id = glCreateShader(type);
     const char* src = shader.c_str();
     glShaderSource(id, 1, &src, nullptr);
     
@@ -96,6 +96,25 @@ int main(void)
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+
+
+    std::string vertexShader = 
+    "#version 330 core\n"
+    "layout(location = 0) in vec4 position;\n"
+    "void main(){\n"
+    "gl_Position = position;\n"
+    "}\n";
+
+    std::string fragmentShader = 
+    "#version 330 core\n"
+    "layout(location = 0) out vec4 color;\n"
+    "void main(){\n"
+    "color = vec4(1.0, 0.0, 0.0, 1.0);\n"
+    "}\n";
+
+    unsigned int shader = CreateShader(vertexShader, fragmentShader);
+    glUseProgram(shader);
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
