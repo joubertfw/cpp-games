@@ -4,6 +4,53 @@
 
 #include <iostream>
 
+static int CompileShader(unsigned int type, const std::string& shader)
+{
+    unsigned int id = glCreateShader(GL_VERTEX_SHADER);
+    const char* src = shader.c_str();
+    glShaderSource(id, 1, &src, nullptr);
+    
+    glCompileShader(id);
+
+    int result;
+    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+
+    if(result == GL_FALSE)
+    {
+        int lenght;
+        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &lenght);
+
+        char* message = (char*)alloca(lenght * sizeof(char));
+
+        glGetShaderInfoLog(id, lenght, &lenght, message);
+
+        std::cout << (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment") << " shader compilation failed: " << message << std::endl;
+        
+        glDeleteShader(id);
+
+        return 0;
+    }
+
+    return id;
+}
+
+static int CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+{
+    unsigned int program = glCreateProgram();
+    unsigned int vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShader);
+    unsigned int fragmentShaderId  = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+
+    glAttachShader(program, vertexShaderId);
+    glAttachShader(program, fragmentShaderId);
+    glLinkProgram(program);
+    glValidateProgram(program);
+
+    glDeleteShader(vertexShaderId);
+    glDeleteShader(fragmentShaderId);
+
+    return program;
+}
+
 int main(void)
 {
     #ifdef GLEW_STATIC
