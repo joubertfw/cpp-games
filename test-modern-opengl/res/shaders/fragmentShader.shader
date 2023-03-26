@@ -1,8 +1,9 @@
 #version 330 core
 
-layout(location = 0) out vec4 color;
+out vec4 color;
+in vec4 gl_FragCoord;
 
 void main()
 {
-    color = vec4(1.0, 1.0, 0.0, 1.0);
+    color = vec4(vec3(gl_FragCoord), 1.0);
 }
