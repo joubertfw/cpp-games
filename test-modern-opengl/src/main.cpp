@@ -5,6 +5,27 @@
 #include <iostream>
 #include <fstream>
 
+#define ASSERT(x) if(!(x)) __debugbreak();
+
+#define GLCall(x) GLClearError();\
+    x;\
+    ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+
+static void GLClearError()
+{
+    while(glGetError() != GL_NO_ERROR);
+}
+
+static bool GLLogCall(const char* function, const char* file, int line)
+{
+    while(GLenum error = glGetError())
+    {
+        std::cout << "OpenGL Error (" << error << ")" << function << file << ":" << line << std::endl;
+        return false;
+    }
+    return true;
+}
+
 static std::string ParseShader(const std::string& filepath)
 {
     std::ifstream stream(filepath);
@@ -136,7 +157,9 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        
+        GLCall(glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr));
+        
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
